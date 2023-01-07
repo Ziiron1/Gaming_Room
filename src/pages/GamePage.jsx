@@ -279,6 +279,7 @@ function GamePage() {
                 <br />
               </>
             )}
+            <br />
             {data.website && (
               <>
                 <a style={{ fontSize: '1rem' }} className="website" href={data.website}> <p>Website: {data.website}</p></a>
