@@ -87,7 +87,13 @@ footer {
     background-color: white;
 }
 
+.footer-col {
+    gap: 20px;
+}
+
 .footer-col .form-sub input {
+    border-radius: 3px;
+    gap: 20px;
     width: 100%;
     padding: 10px;
     font-size: 15px;
@@ -95,6 +101,11 @@ footer {
     border: 1px solid white;
     color: white;
     background-color: #252525;
+}
+
+.texto {
+    width: 200px;
+    height: 80px;
 }
 
 .footer-col .form-sub input::placeholder {

@@ -43,9 +43,28 @@
 }
 
 .game_tags {
-    padding: 2px;
     background-color: #11111188;
     border-radius: 4px;
+    padding: 10px;
+    max-width: max-content;
+    max-height: 75%;
+    font-size: 1rem;
+}
+
+.ShowTags {
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(255, 247, 237);
+    background: #131313;
+    transition: all ease .3s;
+    cursor: pointer;
+}
+
+.ShowTags:hover {
+    color: rgb(255, 247, 237);
+    background: rgb(59, 59, 59);
 }
 
 .center {
@@ -69,9 +88,4 @@
     padding: 2px;
     border-radius: 6px;
     background: #11111188;
-}
-
-.ratings_item:hover,
-.ratings:hover {
-    opacity: .9;
 }
