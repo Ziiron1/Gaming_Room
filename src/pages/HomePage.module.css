@@ -1,0 +1,31 @@
+.numbers_of_pages {
+  width: 100%;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 0;
+  gap: 12px;
+  list-style: none;
+  padding: 20px;
+}
+
+.page_link {
+  padding: 8px;
+  border: 2px solid #303030;
+  border-radius: 4px;
+  background-color: #202020;
+  color: aliceblue;
+  transition: all ease .3s;
+}
+
+.page_link:hover {
+  color: #202020;
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+.selected {
+  color: white;
+  background-color: blue;
+}

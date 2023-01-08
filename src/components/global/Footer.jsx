@@ -26,7 +26,7 @@ function Footer() {
           <div className="footer-col">
             <h4>Subscribe!</h4>
             <div className="form-sub">
-              <form action="https://formcarry.com/s/ChvCzDJuf" method="POST" accept-charset="UTF-8">
+              <form action="https://formcarry.com/s/ChvCzDJuf" method="POST" acceptCharset="UTF-8">
                 <input style={{ margin: '10px 0 0px 0' }} type="name" name="Name" placeholder='Your Name' />
                 <input style={{ margin: '10px 0 0px 0' }} type="text" className='texto' name="text" placeholder='Write me a message' />
                 <button className='btn-primary'>Submit</button>
