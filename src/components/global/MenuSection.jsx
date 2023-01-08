@@ -28,7 +28,7 @@ function MenuSection({ title, items }) {
       <h2>{title}</h2>
       {items &&
         items.map((item) => (
-          <LinkElem key={item.id} to={`games/${item.slug}`}>
+          <LinkElem key={item.id} to={`games/${item.id}`}>
             {item.name}
           </LinkElem>
         ))}

@@ -34,10 +34,10 @@ export const GET_GAMES_BY_PLATFORM = (platform_id, signal) => {
   }
 }
 
-export const GET_GAME_BY_ID = (slug, signal) => {
+export const GET_GAME_BY_ID = (id, signal) => {
   return {
     method: 'get',
-    url: BASE_URL + `/games/${slug}?` + API_KEY,
+    url: BASE_URL + `/games/${id}?` + API_KEY,
     signal
   }
 }
