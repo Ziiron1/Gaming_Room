@@ -25,9 +25,9 @@ const Name = styled.h2`
   line-height: 1.5;
 `
 
-function Card({ name, background_image, id, path }) {
+function Card({ name, background_image, path, slug }) {
   return (
-    <Link to={`${path}${id}`}>
+    <Link to={`${path}${slug}`}>
       <CardGame>
         <Image src={background_image} height='200px' alt={name} />
         <Info>

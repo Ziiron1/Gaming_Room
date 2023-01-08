@@ -31,6 +31,10 @@ const Navigation = styled.nav`
     z-index: 9999;
 `;
 
+function handleClick() {
+  window.location.reload();
+  localStorage.removeItem('currentPage');
+}
 
 function Header() {
   return (
@@ -40,7 +44,10 @@ function Header() {
           <HeaderContainer>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <LinkElem to="/">
-                <Logo />
+                <div onClick={handleClick}>
+                  <Logo />
+
+                </div>
               </LinkElem>
 
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.2rem', marginRight: '10px' }}>

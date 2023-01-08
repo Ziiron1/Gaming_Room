@@ -84,8 +84,8 @@ function GamePage() {
   let description = [''];
   if (data && data.description_raw) {
     description = data.description_raw;
-    if (description.length > 1310) {
-      description = description.substring(0, 1310) + "...";
+    if (description.length > 1200) {
+      description = description.substring(0, 1200) + "...";
     }
   }
 
@@ -180,7 +180,7 @@ function GamePage() {
             <br />
 
             {/* Descrição do jogo */}
-            {data ? (
+            {data && data.description_raw ? (
               <div className={styles.description_game} style={{ letterSpacing: .8 }}>
                 {data.description_raw && (
                   <>
