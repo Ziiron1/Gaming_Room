@@ -49,7 +49,7 @@
   overflow: hidden;
 }
 
-.number.select {
-  background-color: red;
-  color: black;
+.loader {
+  margin-left: 300px;
+  padding-bottom: 100px;
 }

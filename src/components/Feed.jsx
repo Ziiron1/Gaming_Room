@@ -13,12 +13,13 @@ const Title = styled.h1`
   grid-column: 1 / -1;
 `
 
-function Feed({ data, path, title }) {
+function Feed({ data, path, title, gamesData }) {
 
   return (
     <Container className="comeFromLeft">
       <Title>{title}</Title>
-      {data && data.results.map((game) => <Card key={game.id} path={path} {...game} />)}
+      {data && data.results.map((game) => <Card key={game.id} path={path} {...game} gamesData={gamesData} />)}
+
     </Container>
   );
 }

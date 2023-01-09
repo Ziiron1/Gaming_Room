@@ -4,6 +4,7 @@ import useFetch from '../hooks/useFetch';
 import { GET_GAMES_BY_PLATFORM, GET_GAME_BY_ID } from '../api/Api';
 import Feed from '../components/Feed';
 import styles from './GamePage.module.css'
+import Loading from '../img/Loading.svg'
 
 function GamePage() {
   const { query } = useParams();
@@ -19,19 +20,57 @@ function GamePage() {
   React.useEffect(() => {
     switch (query) {
       case '1':
-        setTitle('Principais jogos de PC');
+        setTitle('Top Xbox One Games');
         break;
       case '2':
-        setTitle('Principais jogos de Playstation');
+        setTitle('Top iOS Games');
         break;
       case '3':
-        setTitle('Principais jogos de Xbox');
+        setTitle('Top Xbox Games');
+        break;
+      case '4':
+        setTitle('Top Pc Games');
+        break;
+      case '5':
+        setTitle('Top macOS Games');
+        break;
+      case '6':
+        setTitle('Top Linux Games');
         break;
       case '7':
-        setTitle('Principais jogos da Nintendo');
+        setTitle('Top Nintendo Switch Games');
+        break;
+      case '14':
+        setTitle('Top Xbox 360 Games');
+        break;
+      case '16':
+        setTitle('Top PlayStation 3 Games');
+        break;
+      case '18':
+        setTitle('Top PlayStation 4 Games');
+        break;
+      case '21':
+        setTitle('Top Android Games');
+        break;
+      case '171':
+        setTitle('Top Web Games');
+        break;
+      case '186':
+        setTitle('Top Xbox Series S/X Games');
+        break;
+      case '187':
+        setTitle('Top PlayStation 5 Games');
         break;
     }
   }, [query]);
+
+  // React.useEffect(() => {
+  //   switch (query) {
+  //     case '1':
+  //       setTitle('Top Xbox One Games');
+  //       break;
+  //   }
+  // }, [query]);
 
   const getMessage = (rating) => {
     return rating.title === 'exceptional' ? '🎯 Exceptional' :
@@ -41,21 +80,23 @@ function GamePage() {
   }
 
 
+  async function fetchGamesByPlatform(query, signal) {
+    const { data } = await request(GET_GAMES_BY_PLATFORM(query, signal));
+    console.log(data);
+  }
+
+  async function fetchGameById(query, signal) {
+    await request(GET_GAME_BY_ID(query, signal));
+  }
+
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    if (query < 8) {
-      async function fetchApi() {
-        const { data } = await request(GET_GAMES_BY_PLATFORM(query, signal));
-        console.log(data);
-      }
-      fetchApi();
+    if (query < 190) {
+      fetchGamesByPlatform(query, signal);
     } else {
-      async function fetchApi() {
-        await request(GET_GAME_BY_ID(query, signal));
-      }
-      fetchApi();
+      fetchGameById(query, signal);
     }
 
     return () => {
@@ -63,6 +104,9 @@ function GamePage() {
     };
 
   }, [query]);
+
+
+
 
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -89,7 +133,7 @@ function GamePage() {
     }
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <img src={Loading} alt="Loader" className={styles.loader} />;
   if (error) return <p>{error}</p>;
   if (data && data.results) return <Feed title={title} path="/games/" data={data} />;
   if (data)
@@ -99,14 +143,11 @@ function GamePage() {
           <div className={styles.platforms_flex}>
             {/* Plataformas */}
             <h3 style={{ paddingBottom: 7 }}>{data.platforms.length > 1 ? 'Plataforms: ' : 'Plataform: '}</h3>
-            {data.platforms.map((platform, index) => (
-              <h3 key={index}
-                style={{
-                  marginTop: 3, marginLeft: 2, fontSize: '1rem'
-                }}>&nbsp;
+            {data.platforms.slice(0, 9).map((platform, index) => (
+              <h3 key={index} style={{ marginTop: 3, marginLeft: 2, fontSize: '1rem' }}>
+                &nbsp;
                 {platform.platform.name}
                 {index < data.platforms.length - 1 && ','}
-
               </h3>
             ))}
           </div>
@@ -180,7 +221,7 @@ function GamePage() {
             <br />
 
             {/* Descrição do jogo */}
-            {data && data.description_raw ? (
+            {data || data.description_raw ? (
               <div className={styles.description_game} style={{ letterSpacing: .8 }}>
                 {data.description_raw && (
                   <>
@@ -195,14 +236,14 @@ function GamePage() {
                   <>
                     <div style={{ display: 'flex', fontSize: '1rem' }}>
                       <p>Website:&nbsp; </p>
-                      <a style={{ fontSize: '1rem' }} className={styles.website} href={data.website}>  {data.website}</a>
+                      <a style={{ fontSize: '1rem' }} className={styles.website} href={data.website} target="_blank">  {data.website}</a>
                     </div>
                   </>
                 )}
               </div>
 
             ) : (
-              <p>Carregando ...</p>
+              <p>loading ...</p>
             )}
 
           </div>

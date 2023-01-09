@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import Feed from '../components/Feed';
 import useFetch from '../hooks/useFetch'
-import { GET_GAMES_BY_DATE } from '../api/Api';
+import { GET_GAMES_BY_DATE, GET_ALL } from '../api/Api';
 import styles from './HomePage.module.css';
+import Loading from '../img/Loading.svg'
 
 function HomePage() {
   const [currentPage, setCurrentPage] = useState(parseInt(localStorage.getItem('currentPage'), 10) || 1);
   const [quantityPerpage, setQuantityPerpage] = useState(20);
-  const { request, data, loading, error } = useFetch();
+  const { request, data, gamesData, loading, error } = useFetch();
+  const [gamesresult, setGamesResult] = useState();
 
   useEffect(() => {
+
+    /* Getting Api */
     async function requestApi() {
-      await request(GET_GAMES_BY_DATE('2022-01-01', '2023-01-06', currentPage, quantityPerpage));
+      const response = await request(GET_GAMES_BY_DATE('2022-01-01', '2023-01-06', currentPage, quantityPerpage));
+
+      localStorage.setItem('api', JSON.stringify(response));
+
+      setGamesResult(response);
+    }
+
+    const api = localStorage.getItem('api');
+    if (api) {
+      setGamesResult(JSON.parse(api));
+    } else {
     }
     requestApi();
   }, [currentPage, quantityPerpage]);
+
+
 
   const handlePageChange = page => {
     setCurrentPage(page);
@@ -24,7 +40,7 @@ function HomePage() {
   const Pagination = ({ totalPages }) => {
     const pageNumbers = [...Array(totalPages).keys()].map(i => i + 1).map(number => ({ number, selected: number === currentPage }));
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <img src={Loading} alt="Loader" className={styles.loader} />;
     if (error) return <p>{error}</p>;
     return (
       <div>
@@ -62,17 +78,16 @@ function HomePage() {
           <>
             <form className={styles.form_quantity}>
               <label htmlFor="quantity-per-page">
-                <strong> <span> Cards per Page: </span> </strong>
+                <strong> <span> Games per Page: </span> </strong>
                 <select id="quantity-per-page" className={styles.select_form} value={quantityPerpage} onChange={e => setQuantityPerpage(e.target.value)}>
                   <option value="12">12</option>
                   <option value="20">20</option>
                   <option value="32">32</option>
                   <option value="40">40</option>
-                  <option value="52">52</option>
                 </select>
               </label>
             </form>
-            <Feed title='Principais jogos de 2022' path='games/' data={data} />
+            <Feed title='Main Games of 2022' path='games/' data={data} gamesData={gamesresult.data} />
           </>
         )}
 

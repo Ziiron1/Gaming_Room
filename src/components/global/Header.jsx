@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../img/controle.svg';
 import { ReactComponent as User } from '../../img/user.svg'
-import styles from './Header.Module.css'
 
 const HeaderContainer = styled.header`
   padding: 20px 20px;
@@ -32,8 +31,8 @@ const Navigation = styled.nav`
 `;
 
 function handleClick() {
-  window.location.reload();
   localStorage.removeItem('currentPage');
+  window.location.assign('/');
 }
 
 function Header() {
@@ -46,10 +45,8 @@ function Header() {
               <LinkElem to="/">
                 <div onClick={handleClick}>
                   <Logo />
-
                 </div>
               </LinkElem>
-
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.2rem', marginRight: '10px' }}>
                 <User style={{ marginRight: '30px' }} />
                 <a href='/'>

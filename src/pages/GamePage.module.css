@@ -119,3 +119,8 @@
     background: rgb(59, 59, 59);
     cursor: pointer;
 }
+
+.loader {
+    margin-left: 300px;
+    padding-bottom: 100px;
+}

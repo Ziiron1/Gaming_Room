@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LinkElem = styled(NavLink)`
-  background: #202020;
-  padding: 1rem;
+  background: #242424;
+  padding: .675rem;
   border-radius: 8px;
+  border: 1.5px solid #101010;
   transition: 0.2s;
   &:hover, &:focus {
-    background: #343434;
+    background: #424242;
   }
   &.active {
     color: #fff;

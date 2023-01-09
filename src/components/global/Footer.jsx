@@ -1,6 +1,6 @@
 import React from 'react'
 import './Footer.css'
-import GamingRoom from '../../img/GamingRoom.png'
+import GamingRoom from '../../img/controle.svg'
 
 
 function Footer() {
@@ -10,9 +10,6 @@ function Footer() {
     <footer>
       <div className="container-footer">
         <div className="row-footer">
-          <div className="footer-col">
-            <img src={GamingRoom} width="200px" className='logo_company' alt="Logo Company" />
-          </div>
           <div className="footer-col">
           </div>
           <div className="footer-col">
