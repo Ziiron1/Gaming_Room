@@ -5,8 +5,8 @@ import Card from '../components/Card'
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 0px 20px;
-  gap: 24px;
+  padding: 0px 22px;
+  gap: 25px;
 `;
 
 const Title = styled.h1`

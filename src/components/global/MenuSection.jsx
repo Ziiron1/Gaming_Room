@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const LinkElem = styled(NavLink)`
   background: #242424;
-  padding: .675rem;
+  padding: .5rem;
   border-radius: 8px;
   border: 1.5px solid #101010;
   transition: 0.2s;
@@ -12,7 +12,7 @@ const LinkElem = styled(NavLink)`
     background: #424242;
   }
   &.active {
-    color: #fff;
+    color: #f3f3f3;
     background: #343434;
   }
 `;
@@ -20,7 +20,7 @@ const LinkElem = styled(NavLink)`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 `
 
 function MenuSection({ title, items }) {

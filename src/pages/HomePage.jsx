@@ -10,6 +10,7 @@ function HomePage() {
   const [quantityPerpage, setQuantityPerpage] = useState(20);
   const { request, data, gamesData, loading, error } = useFetch();
   const [gamesresult, setGamesResult] = useState();
+  const [pagesToShow, setPagesToShow] = useState(6);
 
   useEffect(() => {
 
@@ -38,85 +39,145 @@ function HomePage() {
   }
 
   const Pagination = ({ totalPages }) => {
-    const pageNumbers = [...Array(totalPages).keys()].map(i => i + 1).map(number => ({ number, selected: number === currentPage }));
+    const pageNumbers = [...Array(totalPages).keys()].map(i => i + 1);
 
     if (loading) return <img src={Loading} alt="Loader" className={styles.loader} />;
     if (error) return <p>{error}</p>;
     return (
       <div>
 
-        <nav>
-          <ul className={styles.numbers_of_pages} style={{ marginBottom: '20px' }}>
-            {currentPage > 1 && (
-              <li className={styles.page_item}>
-                <button className={styles.page_link} onClick={() => handlePageChange(currentPage - 1)}>
-                  Previous
-                </button>
-              </li>
-            )}
-            {pageNumbers.map(number => (
-              <li key={number.number} className={styles.page_item}>
-                <button
-                  className={`${styles.page_link} ${number.number === currentPage ? styles.selected : ''}`}
-                  onClick={() => handlePageChange(number.number)}
-                >
-                  {number.number}
-                </button>
-              </li>
-            ))}
-            {currentPage < totalPages && (
-              <li className={styles.page_item}>
-                <button className={styles.page_link} onClick={() => handlePageChange(currentPage + 1)}>
-                  Next
-                </button>
-              </li>
-            )}
-          </ul>
-        </nav>
+        <section className={styles.featuredgame}>
+          Featured Game
+        </section>
 
-        {data && (
-          <>
-            <form className={styles.form_quantity}>
-              <label htmlFor="quantity-per-page">
-                <strong> <span> Games per Page: </span> </strong>
-                <select id="quantity-per-page" className={styles.select_form} value={quantityPerpage} onChange={e => setQuantityPerpage(e.target.value)}>
-                  <option value="12">12</option>
-                  <option value="20">20</option>
-                  <option value="32">32</option>
-                  <option value="40">40</option>
-                </select>
-              </label>
-            </form>
-            <Feed title='Main Games of 2022' path='games/' data={data} gamesData={gamesresult.data} />
-          </>
-        )}
+        <main>
 
-        <nav>
-          <ul className={styles.numbers_of_pages}>
-            {currentPage > 1 && (
-              <li className={styles.page_item}>
-                <button className={styles.page_link} onClick={() => handlePageChange(currentPage - 1)}>
-                  Previous
-                </button>
-              </li>
-            )}
-            {pageNumbers.map(number => (
-              <li key={number.number} className={styles.page_item}>
-                <button className={`${styles.page_link} ${number.selected ? styles.selected : ''}`} onClick={() => handlePageChange(number.number)}>
-                  {number.number}
-                </button>
-              </li>
-            ))}
-            {currentPage < totalPages && (
-              <li className={styles.page_item}>
-                <button className={styles.page_link} onClick={() => handlePageChange(currentPage + 1)}>
-                  Next
-                </button>
-              </li>
-            )}
-          </ul>
-        </nav>
+          <nav>
+            <ul className={styles.numbers_of_pages} style={{ marginBottom: '20px' }}>
+              {currentPage > 1 && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} style={{ marginRight: '10px' }} onClick={() => handlePageChange(1)}>Start</button>
+                  <button className={styles.page_link} onClick={() => handlePageChange(currentPage - 1)}>
+                    Previous
+                  </button>
+                </li>
+              )}
+              {currentPage > pagesToShow + 2 && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} onClick={() => handlePageChange(currentPage + pagesToShow - 11)}>...</button>
+                </li>
+              )}
+              {pageNumbers.map((number, index) => {
+                if (currentPage < pagesToShow + 2) {
+                  if (index + 1 > pagesToShow) return null;
+                } else if (currentPage > totalPages - pagesToShow - 1) {
+                  if (index + 1 < totalPages - pagesToShow) return null;
+                } else {
+                  if (index + 1 < currentPage - pagesToShow + 2 || index + 1 > currentPage + pagesToShow - 1) return null;
+                }
+                return (
+                  <li key={number} className={styles.page_item}>
+                    <button
+                      className={`${styles.page_link} ${number === currentPage ? styles.selected : ''}`}
+                      onClick={() => handlePageChange(number)}
+                    >
+                      {number}
+                    </button>
+                  </li>
+                );
+              })}
+              {currentPage < totalPages - pagesToShow - 1 && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} onClick={() => {
+                    setCurrentPage(currentPage + pagesToShow + 1);
+                    handlePageChange(currentPage + pagesToShow);
+                  }}>...</button>
+                </li>
+              )}
 
+              {currentPage < totalPages && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} onClick={() => handlePageChange(currentPage + 1)}>
+                    Next
+                  </button>
+                  <button className={styles.page_link} style={{ marginLeft: '10px' }} onClick={() => handlePageChange(totalPages)}>End</button>
+                </li>
+              )}
+            </ul>
+          </nav>
+
+          {data && (
+            <>
+              <form className={styles.form_quantity}>
+                <label htmlFor="quantity-per-page">
+                  <strong> <span> Games per Page: </span> </strong>
+                  <select id="quantity-per-page" className={styles.select_form} value={quantityPerpage} onChange={e => setQuantityPerpage(e.target.value)}>
+                    <option value="12">12</option>
+                    <option value="20">20</option>
+                    <option value="32">32</option>
+                    <option value="40">40</option>
+                  </select>
+                </label>
+              </form>
+              <Feed title='Main Games of 2022' path='games/' data={data} gamesData={gamesresult.data} />
+            </>
+          )}
+
+          <nav>
+            <ul className={styles.numbers_of_pages} style={{ marginBottom: '20px' }}>
+              {currentPage > 1 && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} style={{ marginRight: '10px' }} onClick={() => handlePageChange(1)}>Start</button>
+                  <button className={styles.page_link} onClick={() => handlePageChange(currentPage - 1)}>
+                    Previous
+                  </button>
+                </li>
+              )}
+              {currentPage > pagesToShow + 2 && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} onClick={() => handlePageChange(currentPage + pagesToShow - 11)}>...</button>
+                </li>
+              )}
+              {pageNumbers.map((number, index) => {
+                if (currentPage < pagesToShow + 2) {
+                  if (index + 1 > pagesToShow) return null;
+                } else if (currentPage > totalPages - pagesToShow - 1) {
+                  if (index + 1 < totalPages - pagesToShow) return null;
+                } else {
+                  if (index + 1 < currentPage - pagesToShow + 2 || index + 1 > currentPage + pagesToShow - 1) return null;
+                }
+                return (
+                  <li key={number} className={styles.page_item}>
+                    <button
+                      className={`${styles.page_link} ${number === currentPage ? styles.selected : ''}`}
+                      onClick={() => handlePageChange(number)}
+                    >
+                      {number}
+                    </button>
+                  </li>
+                );
+              })}
+              {currentPage < totalPages - pagesToShow - 1 && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} onClick={() => {
+                    setCurrentPage(currentPage + pagesToShow + 1);
+                    handlePageChange(currentPage + pagesToShow);
+                  }}>...</button>
+                </li>
+              )}
+
+              {currentPage < totalPages && (
+                <li className={styles.page_item}>
+                  <button className={styles.page_link} onClick={() => handlePageChange(currentPage + 1)}>
+                    Next
+                  </button>
+                  <button className={styles.page_link} style={{ marginLeft: '10px' }} onClick={() => handlePageChange(totalPages)}>End</button>
+                </li>
+              )}
+            </ul>
+          </nav>
+
+        </main>
 
       </div>
     )
@@ -124,7 +185,7 @@ function HomePage() {
 
   return (
     <>
-      <Pagination totalPages={15} />
+      <Pagination totalPages={75} />
     </>
   );
 }

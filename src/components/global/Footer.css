@@ -54,6 +54,10 @@ footer {
     transition: all 0.3s ease;
 }
 
+h2 {
+    font-family: 'Inter', sans-serif !important;
+}
+
 .footer-col ul li a:hover {
     color: #cecdcd;
     padding-left: 10px;

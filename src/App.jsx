@@ -11,7 +11,7 @@ import Page404 from '../src/pages/Page404';
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 1.7fr 10fr;
 `
 
 function App() {

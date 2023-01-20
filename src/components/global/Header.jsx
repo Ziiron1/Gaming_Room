@@ -5,7 +5,7 @@ import { ReactComponent as Logo } from '../../img/controle.svg';
 import { ReactComponent as User } from '../../img/user.svg'
 
 const HeaderContainer = styled.header`
-  padding: 20px 20px;
+  padding: 25px 20px;
 `;
 
 const LinkElem = styled(Link)`
@@ -50,7 +50,7 @@ function Header() {
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.2rem', marginRight: '10px' }}>
                 <User style={{ marginRight: '30px' }} />
                 <a href='/'>
-                  <span>Future Page</span>
+                  <span>Welcome Guest</span>
                 </a>
               </div>
             </div>

@@ -26,7 +26,7 @@ function GamePage() {
         setTitle('Top iOS Games');
         break;
       case '3':
-        setTitle('Top Xbox Games');
+        setTitle('Top iOS Games');
         break;
       case '4':
         setTitle('Top Pc Games');

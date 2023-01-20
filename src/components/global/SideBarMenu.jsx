@@ -1,7 +1,6 @@
 import React from 'react';
 import MenuSection from './MenuSection';
 import styled from 'styled-components';
-import styles from './MenuBar.Module.css'
 
 const Navigation = styled.nav`
   display: flex;
@@ -26,11 +25,11 @@ const plataformas = [
   { name: 'Web', id: 171 }
 ];
 
-const parents_platformas = [
-  { name: 'Playstation', id: 2 },
-  { name: 'Xbox', id: 3 },
-  { name: 'Nintendo', id: 7 },
-]
+// const parents_platformas = [
+//   { name: 'Playstation', id: 2 },
+//   { name: 'Xbox', id: 3 },
+//   { name: 'Nintendo', id: 7 },
+// ]
 
 function SideBarMenu() {
   return (
@@ -38,7 +37,7 @@ function SideBarMenu() {
       {/* <MenuSection title="All in One" items={parents_platformas} /> */}
       <MenuSection title="Platforms" items={plataformas}>
         {plataformas.map(platform => (
-          <li key={platform.id} className={styles.menu_item}>{platform.name}</li>
+          <li key={platform.id} className='menu_item'>{platform.name}</li>
         ))}
       </MenuSection>
     </Navigation>
