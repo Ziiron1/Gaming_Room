@@ -8,6 +8,7 @@ import GamePage from './pages/GamePage';
 import SideBarMenu from './components/global/SideBarMenu';
 import styled from 'styled-components';
 import Page404 from '../src/pages/Page404';
+import Senha from './Senha';
 
 const Container = styled.div`
   display: grid;
@@ -22,6 +23,7 @@ function App() {
         <SideBarMenu title='Plataformas' />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/senha" element={<Senha />} />
           <Route path='*' element={<Page404 />} />
           <Route path="games/:query" element={<GamePage />} />
         </Routes>
