@@ -1,4 +1,4 @@
-const API_KEY = 'key=73b0ab60b59b4f00bef9910f45e0f9fa';
+const API_KEY = 'key=7a53668fec654bc4ad74b08c37725f8a';
 const BASE_URL = 'https://api.rawg.io/api';
 
 export const GET_GAMES_BY_DATE = (initial_date, final_date, numberofpage, sizepage) => {
